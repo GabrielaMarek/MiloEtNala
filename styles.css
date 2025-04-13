@@ -1,0 +1,387 @@
+:root {
+    --primary-color: #2A2F4F;
+    --secondary-color: #917FB3;
+    --accent-color: #E8A0BF;
+    --bg-gradient: linear-gradient(135deg, #FDEBED 0%, #F8F8FF 100%);
+    --text-color: #2A2F4F;
+    --glass-bg: rgba(255, 255, 255, 0.9);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Space Grotesk', sans-serif;
+    color: var(--text-color);
+    background: var(--bg-gradient);
+    line-height: 1.7;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+header {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    padding: 1.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    animation: slideDown 0.5s ease;
+}
+
+@keyframes slideDown {
+    from { transform: translateY(-100%); }
+    to { transform: translateY(0); }
+}
+
+h1, h2, h3 {
+    font-family: 'Poppins', sans-serif; 
+    letter-spacing: normal;
+    color: var(--primary-color) !important;
+}
+
+h1 {
+    background: none !important;
+    -webkit-text-fill-color: var(--primary-color) !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    list-style: none;
+}
+
+nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    position: relative;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s ease;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--accent-color);
+    transition: width 0.3s ease;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+.hero {
+    text-align: center;
+    padding: 8rem 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('ChatGPT\ Image\ 13\ kwi\ 2025\,\ 18_34_04.png') center/cover;
+    filter: saturate(1.2) brightness(1.1);
+    z-index: -1;
+}
+
+.hero-text {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.bg-glass {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+}
+
+.cat-card li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.cat-card li:last-child {
+    border-bottom: none;
+}
+
+.cat-card li::before {
+    content: "·";
+    font-weight: bold;
+    color: var(--accent-color);
+}
+
+.hero h2 {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    animation: float 3s ease-in-out infinite;
+    background: var(--glass-bg);
+    padding: 2rem;
+    border-radius: 20px;
+    display: inline-block;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.cat-card {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    transform: translateY(0);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.cat-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.cat-card h3 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-left: 2rem;
+}
+
+.cat-card h3::before {
+    content: '🐾';
+    position: absolute;
+    left: -0.5rem;
+    top: -0.5rem;
+    font-size: 1.5rem;
+    opacity: 0.8;
+}
+
+.gallery {
+    padding: 4rem 2rem;
+}
+
+.grid-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 2rem auto;
+}
+
+.grid-gallery img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 15px;
+    transition: all 0.4s ease;
+    cursor: pointer;
+    filter: grayscale(20%);
+}
+
+.grid-gallery img:hover {
+    transform: scale(1.05) rotate(2deg);
+    filter: grayscale(0%);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+footer {
+    background: var(--primary-color);
+    color: white;
+    text-align: center;
+    padding: 2rem;
+    margin-top: 4rem;
+    clip-path: polygon(0 20px, 100% 0, 100% 100%, 0 100%);
+}
+
+/* Scroll Animation */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-gradient);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--secondary-color);
+    border-radius: 4px;
+}
+
+.presentation {
+    padding: 4rem 2rem;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(10px);
+    position: relative;
+    z-index: 2;
+    margin: 2rem 0;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.gallery {
+    padding: 4rem 2rem;
+    background: var(--bg-gradient);
+    position: relative;
+    z-index: 2;
+}
+
+.grid-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 2rem auto;
+}
+
+/* Add this media query */
+@media (max-width: 768px) {
+    .grid-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .cat-card {
+        margin: 1rem;
+    }
+}
+
+/* Ensure sections are visible */
+#presentation, #photos {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+}
+
+/* Image card styles */
+.image-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    aspect-ratio: 9/16;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.image-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+/* Animations */
+.image-card {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: cardReveal 1s ease forwards;
+}
+
+@keyframes cardReveal {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.image-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
+
+.image-card:hover img {
+    transform: scale(1.05);
+}
+
+/* Staggered animation delays */
+.image-card:nth-child(1) { animation-delay: 0.2s; }
+.image-card:nth-child(2) { animation-delay: 0.4s; }
+.image-card:nth-child(3) { animation-delay: 0.6s; }
+.image-card:nth-child(4) { animation-delay: 0.8s; }
+.image-card:nth-child(5) { animation-delay: 1.0s; }
+.image-card:nth-child(6) { animation-delay: 1.2s; }
+.image-card:nth-child(7) { animation-delay: 1.4s; }
+.image-card:nth-child(8) { animation-delay: 1.6s; }
+
+@media (max-width: 768px) {
+    .image-card {
+        max-width: 300px;
+        margin: 0 auto;
+    }
+}
+
+/* Parallax effect on scroll */
+@media (prefers-reduced-motion: no-preference) {
+    .phone-frame {
+        transition: transform 0.5s ease-out;
+    }
+    
+    .scrolling .phone-frame {
+        transform: translateY(calc(var(--scroll-y) * 0.1px));
+    }
+}
+
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.2rem;
+    }
+
+    .hero h2 {
+        font-size: 2rem;
+        padding: 1.5rem;
+    }
+
+    .grid-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
+.grid-gallery img:nth-child(1) { transition-delay: 0.1s; }
+.grid-gallery img:nth-child(2) { transition-delay: 0.2s; }
+.grid-gallery img:nth-child(3) { transition-delay: 0.3s; }
+.grid-gallery img:nth-child(4) { transition-delay: 0.4s; }
+.grid-gallery img:nth-child(5) { transition-delay: 0.5s; }
+.grid-gallery img:nth-child(6) { transition-delay: 0.6s; }
