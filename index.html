@@ -225,6 +225,24 @@
     </div>
   </section> 
 
+  <section id="memory-game" class="py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-4">Jeu de Mémoire 🧠</h2>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="game-stats mb-4">
+                    <span>⏱️ Temps: <span id="time">0</span>s</span>
+                    <span>🔁 Mouvements: <span id="moves">0</span></span>
+                </div>
+                <div id="game-board" class="row g-3"></div>
+                <div class="text-center mt-4">
+                    <button id="restart" class="btn btn-warning">Nouvelle partie</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
     </main>
 
     <footer id="contact" class="bg-dark text-white py-4">
@@ -415,6 +433,85 @@
     
       observer.observe(document.getElementById('routine'));
     });
+    </script>
+
+<script>
+    const memoryImages = ['milo.jpg', 'nala.jpg', 'milo2.jpg', 'nala2.jpg', 'milo3.jpg', 'nala3.jpg'];
+    let firstCard = null;
+    let moves = 0;
+    let timer;
+    let seconds = 0;
+    
+    function createGame() {
+        const doubledImages = [...memoryImages, ...memoryImages];
+        shuffledCards = doubledImages.sort(() => Math.random() - 0.5);
+        
+        document.getElementById('game-board').innerHTML = shuffledCards
+            .map((img, index) => `
+                <div class="col-3">
+                    <div class="memory-card" data-image="${img}">
+                        <div class="memory-inner">
+                            <div class="memory-front">
+                                <img src="${img}" alt="Milo ou Nala" class="img-fluid">
+                            </div>
+                            <div class="memory-back"></div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+    }
+    
+    document.getElementById('game-board').addEventListener('click', (e) => {
+        const card = e.target.closest('.memory-card');
+        if (!card || card.classList.contains('flipped')) return;
+    
+        if (!firstCard) {
+            startTimer();
+            firstCard = card;
+        } else {
+            moves++;
+            document.getElementById('moves').textContent = moves;
+            checkMatch(firstCard, card);
+            firstCard = null;
+        }
+        
+        card.classList.add('flipped');
+    });
+    
+    function checkMatch(cardA, cardB) {
+        const match = cardA.dataset.image === cardB.dataset.image;
+        if (!match) {
+            setTimeout(() => {
+                cardA.classList.remove('flipped');
+                cardB.classList.remove('flipped');
+            }, 1000);
+        } else if (document.querySelectorAll('.memory-card:not(.flipped)').length === 0) {
+            clearInterval(timer);
+            setTimeout(() => alert(`Bravo ! Terminé en ${seconds}s et ${moves} coups!`), 500);
+        }
+    }
+    
+    function startTimer() {
+        if (!timer) {
+            timer = setInterval(() => {
+                seconds++;
+                document.getElementById('time').textContent = seconds;
+            }, 1000);
+        }
+    }
+    
+    document.getElementById('restart').addEventListener('click', () => {
+        clearInterval(timer);
+        timer = null;
+        seconds = 0;
+        moves = 0;
+        firstCard = null;
+        document.getElementById('time').textContent = '0';
+        document.getElementById('moves').textContent = '0';
+        createGame();
+    });
+    
+    createGame();
     </script>
 </body>
 </html>
