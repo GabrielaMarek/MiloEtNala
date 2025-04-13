@@ -236,6 +236,132 @@ footer {
     transform: translateY(0);
 }
 
+.quiz-option {
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+.quiz-option:hover {
+    transform: scale(1.05);
+  }
+.correct { background-color: #d4edda !important; }
+.wrong { background-color: #f8d7da !important; }
+#quizScreen { max-width: 800px; margin: 0 auto; }
+
+.result-card {
+    background: #f8f9fa;
+    border-radius: 15px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  }
+.score-board {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #2c3e50;
+  }
+
+
+.routine-card {
+    padding: 2rem;
+    border-radius: 20px;
+    position: relative;
+    transition: transform 0.3s ease;
+  }
+  
+.routine-card:hover {
+    transform: translateY(-5px);
+  }
+  
+.milo-style {
+    background: linear-gradient(45deg, #f8f0ff, #e6d3f7);
+    border: 3px solid #8a4fff;
+  }
+  
+.nala-style {
+    background: linear-gradient(45deg, #fff3e6, #ffe0b3);
+    border: 3px solid #ff6b35;
+  }
+  
+.cat-header {
+    border-bottom: 2px dashed;
+    padding-bottom: 1rem;
+  }
+  
+.progress-item {
+    margin-bottom: 2rem;
+  }
+  
+.bg-purple-striped {
+    background: repeating-linear-gradient(
+      45deg,
+      #8a4fff,
+      #8a4fff 10px,
+      #a678ff 10px,
+      #a678ff 20px
+    );
+  }
+  
+.bg-orange-striped {
+    background: repeating-linear-gradient(
+      45deg,
+      #ff6b35,
+      #ff6b35 10px,
+      #ff8c5a 10px,
+      #ff8c5a 20px
+    );
+  }
+  
+.progress {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+.progress-bar {
+    transition: width 1.5s ease-in-out;
+  }
+  
+.signature {
+    font-style: italic;
+    color: #666;
+    font-size: 0.9em;
+  }
+  
+.stats-note {
+    font-size: 0.8em;
+    color: #666;
+    margin-top: 0.3rem;
+  }
+  
+.vs-badge {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: #ff4757;
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: bold;
+    box-shadow: 0 0 20px rgba(255,71,87,0.4);
+    animation: pulse 1.5s infinite;
+  }
+  
+@keyframes pulse {
+    0% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.1); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+  }
+  
+.note {
+    font-size: 0.9em;
+    color: #666;
+    margin-top: 2rem;
+  }
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
     width: 8px;

@@ -69,8 +69,6 @@
                 </div>
             </div>
         </section>
-
-<!-- Gallery Section -->
 <section id="photos" class="py-5">
     <div class="container">
         <h2 class="text-center mb-5">Notre Galerie</h2>
@@ -123,6 +121,110 @@
         </div>
     </div>
 </section>
+
+<section id="quiz" class="py-5 bg-light">
+    <div class="container">
+      <h2 class="text-center mb-4">Quiz Milo & Nala</h2>
+      <div id="quizContainer" class="text-center">
+        <div id="startScreen">
+          <p>Testez vos connaissances sur ces félins fabuleux !</p>
+          <button id="startBtn" class="btn btn-success btn-lg">Commencer le quiz !</button>
+        </div>
+        <div id="quizScreen" style="display: none;">
+          <div class="score-board mb-4">Score : <span id="score">0</span>/10</div>
+          <h4 id="question" class="mb-4"></h4>
+          <div id="options" class="row g-3 mb-4"></div>
+          <button id="nextBtn" class="btn btn-primary" style="display: none;">Question suivante →</button>
+        </div>
+        <div id="resultScreen" style="display: none;"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="routine" class="py-5">
+    <div class="container">
+      <h2 class="text-center mb-5">Face à Face Épique 🔥</h2>
+      
+      <div class="row g-4 position-relative">
+        <div class="vs-badge">VS</div>
+  
+        <div class="col-md-6">
+          <div class="routine-card milo-style animate__animated">
+            <div class="cat-header mb-4">
+              <h3>😴 Milo - Le Spécialiste du Dodo</h3>
+              <div class="signature">"Je dors donc je suis"</div>
+            </div>
+            
+            <div class="progress-item">
+              <div class="d-flex justify-content-between">
+                <span>Compétences en sieste 🛌</span>
+                <span>98%</span>
+              </div>
+              <div class="progress" style="height: 25px;">
+                <div class="progress-bar bg-purple-striped" role="progressbar" style="width: 0%" data-target="98"></div>
+              </div>
+              <div class="stats-note">(Record : 18h consécutives)</div>
+            </div>
+  
+            <div class="progress-item">
+              <div class="d-flex justify-content-between">
+                <span>Énergie dépensée ⚡</span>
+                <span>3%</span>
+              </div>
+              <div class="progress" style="height: 25px;">
+                <div class="progress-bar bg-purple-striped" role="progressbar" style="width: 0%" data-target="3"></div>
+              </div>
+              <div class="stats-note">(Suffit pour atteindre le canapé)</div>
+            </div>
+  
+            <div class="mt-4 fun-facts">
+              <div class="badge bg-purple">🐾 Missions quotidiennes : Câlins x∞</div>
+              <div class="badge bg-purple mt-2">🛋️ Arme secrète : Ronron 2.0 Turbo</div>
+            </div>
+          </div>
+        </div>
+  
+        <div class="col-md-6">
+          <div class="routine-card nala-style animate__animated">
+            <div class="cat-header mb-4">
+              <h3>🏃♀️ Nala - La Tornade sur Pattes</h3>
+              <div class="signature">"Je cours donc le monde est à moi"</div>
+            </div>
+            
+            <div class="progress-item">
+              <div class="d-flex justify-content-between">
+                <span>Création de chaos 🌪️</span>
+                <span>127%</span>
+              </div>
+              <div class="progress" style="height: 25px;">
+                <div class="progress-bar bg-orange-striped" role="progressbar" style="width: 0%" data-target="127"></div>
+              </div>
+              <div class="stats-note">(42 maisons/24h)</div>
+            </div>
+  
+            <div class="progress-item">
+              <div class="d-flex justify-content-between">
+                <span>Mode repos activé 🛑</span>
+                <span>0.5%</span>
+              </div>
+              <div class="progress" style="height: 25px;">
+                <div class="progress-bar bg-orange-striped" role="progressbar" style="width: 0%" data-target="0.5"></div>
+              </div>
+              <div class="stats-note">(Uniquement en cas de panne GPS)</div>
+            </div>
+  
+            <div class="mt-4 fun-facts">
+              <div class="badge bg-orange">🎯 Objectif quotidien : Nouveaux jardins +3</div>
+              <div class="badge bg-orange mt-2">🛸 Équipement : Collier NASA Edition</div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="text-center mt-4 note">* Statistiques officielles validées par le Comité des Chats Domestiques 🐾</div>
+    </div>
+  </section> 
+
     </main>
 
     <footer id="contact" class="bg-dark text-white py-4">
@@ -133,7 +235,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </script>
 <script>
-    // Animation trigger
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -144,12 +245,10 @@
 
     document.querySelectorAll('.phone-frame').forEach((el) => observer.observe(el));
 
-    // Font loading
     document.fonts.ready.then(() => {
         document.body.style.opacity = 1;
     });
 
-    // Parallax effect
     window.addEventListener('scroll', () => {
         document.querySelectorAll('.phone-frame').forEach(frame => {
             const speed = -0.5;
@@ -158,5 +257,164 @@
         });
     });
 </script>
+<script>
+    const quizData = [
+      {
+        question: "Quel chat est connu pour ses siestes marathon ?",
+        options: ["Milo", "Nala"],
+        correct: 0,
+        image: "milo-nap.jpg"
+      },
+      {
+        question: "Qui détient le record d'exploration du quartier ?",
+        options: ["Milo", "Nala"],
+        correct: 1
+      },
+      {
+        question: "Quel chat n'a pas de queue ?",
+        options: ["Milo", "Nala"],
+        correct: 0
+      },
+      {
+        question: "Qui utilise un collier GPS ?",
+        options: ["Milo", "Nala"],
+        correct: 1
+      },
+      {
+        question: "Quel chat a déjà dormi 18 heures d'affilée ?",
+        options: ["Milo", "Nala"],
+        correct: 0
+      },
+      {
+        question: "Qui rapporte le plus de « cadeaux » à la maison ?",
+        options: ["Milo", "Nala"],
+        correct: 1
+      },
+      {
+        question: "Quel chat est expert en câlins ?",
+        options: ["Milo", "Nala"],
+        correct: 0
+      },
+      {
+        question: "Qui a visité 42 maisons en une journée ?",
+        options: ["Milo", "Nala"],
+        correct: 1
+      },
+      {
+        question: "Quel chat préfère les activités canapé ?",
+        options: ["Milo", "Nala"],
+        correct: 0
+      },
+      {
+        question: "Qui a besoin d'aventures quotidiennes ?",
+        options: ["Milo", "Nala"],
+        correct: 1
+      }
+    ];
+  
+    let currentQuestion = 0;
+    let score = 0;
+    let quizActive = false;
+  
+    document.getElementById('startBtn').addEventListener('click', startQuiz);
+    
+    function startQuiz() {
+      document.getElementById('startScreen').style.display = 'none';
+      document.getElementById('quizScreen').style.display = 'block';
+      quizActive = true;
+      showQuestion();
+    }
+  
+    function showQuestion() {
+      const question = quizData[currentQuestion];
+      document.getElementById('question').textContent = question.question;
+      const optionsDiv = document.getElementById('options');
+      optionsDiv.innerHTML = '';
+  
+      question.options.forEach((option, index) => {
+        const button = document.createElement('button');
+        button.className = 'btn btn-outline-primary col-md-6 mx-auto quiz-option';
+        button.textContent = option;
+        button.onclick = () => selectAnswer(index);
+        optionsDiv.appendChild(button);
+      });
+  
+      document.getElementById('nextBtn').style.display = 'none';
+    }
+  
+    function selectAnswer(selectedIndex) {
+      if (!quizActive) return;
+      
+      const question = quizData[currentQuestion];
+      const options = document.getElementsByClassName('quiz-option');
+      
+      Array.from(options).forEach(option => {
+        option.disabled = true;
+        if (Number(option.textContent === question.options[question.correct])) {
+          option.classList.add('correct');
+        } else {
+          option.classList.add('wrong');
+        }
+      });
+  
+      if (selectedIndex === question.correct) {
+        score++;
+        document.getElementById('score').textContent = score;
+      }
+  
+      quizActive = false;
+      document.getElementById('nextBtn').style.display = 'block';
+    }
+  
+    document.getElementById('nextBtn').addEventListener('click', () => {
+      if (currentQuestion < quizData.length - 1) {
+        currentQuestion++;
+        resetQuestionState();
+        showQuestion();
+        quizActive = true;
+      } else {
+        showFinalResults();
+      }
+    });
+  
+    function resetQuestionState() {
+      const options = document.getElementsByClassName('quiz-option');
+      Array.from(options).forEach(option => {
+        option.classList.remove('correct', 'wrong');
+        option.disabled = false;
+      });
+    }
+  
+    function showFinalResults() {
+        document.getElementById('quizScreen').style.display = 'none';
+        const resultDiv = document.getElementById('resultScreen');
+        resultDiv.style.display = 'block';
+        resultDiv.innerHTML = `
+        <h3 class="mb-4">Quiz terminé ! 🎉</h3>
+        <div class="result-card p-4 mb-4">
+            <p>Score final : ${score}/10</p>
+            <p>${score >= 8 ? 'Expert félin confirmé ! 😻' : score >= 5 ? 'Bon score ! 🐾' : 'À réviser les chats... 😿'}</p>
+        </div>
+        <button onclick="location.reload()" class="btn btn-warning">Réessayer</button>
+        `;
+  }
+  </script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            document.querySelectorAll('.progress-bar').forEach(bar => {
+              const target = bar.getAttribute('data-target');
+              bar.style.width = target + '%';
+            });
+          }
+        });
+      }, { threshold: 0.5 });
+    
+      observer.observe(document.getElementById('routine'));
+    });
+    </script>
 </body>
 </html>
