@@ -23,6 +23,8 @@
                         <li class="nav-item"><a class="nav-link" href="#accueil">Accueil</a></li>
                         <li class="nav-item"><a class="nav-link" href="#presentation">Présentation</a></li>
                         <li class="nav-item"><a class="nav-link" href="#photos">Photos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#quiz">Quiz</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#memory-game">Jeu de Mémoire</a></li>
                     </ul>
                 </div>
             </div>
@@ -69,6 +71,9 @@
                 </div>
             </div>
         </section>
+
+        
+
 <section id="photos" class="py-5">
     <div class="container">
         <h2 class="text-center mb-5">Notre Galerie</h2>
@@ -227,7 +232,7 @@
 
   <section id="memory-game" class="py-5 bg-light">
     <div class="container">
-        <h2 class="text-center mb-4">Jeu de Mémoire 🧠</h2>
+        <h2 class="text-center mb-4">Jeu de Mémoire 🧠</h2>       
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="game-stats mb-4">
@@ -241,6 +246,14 @@
             </div>
         </div>
     </div>
+    <div id="memory-result" class="text-center mt-4" style="display: none;">
+        <div class="result-card p-4 mb-3">
+            <h3>🏆 Bravo !</h3>
+            <p>⏱️ Temps: <span id="final-time">0</span>s</p>
+            <p>🔁 Mouvements: <span id="final-moves">0</span></p>
+        </div>
+        <button onclick="resetGame()" class="btn btn-success">Rejouer</button>
+    </div>
 </section>
 
     </main>
@@ -253,26 +266,43 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </script>
 <script>
-    const observer = new IntersectionObserver((entries) => {
+    const navbarHeight = document.querySelector('.navbar').offsetHeight;
+    
+    const sectionObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
+            const id = entry.target.getAttribute('id');
+            const navLink = document.querySelector(`.nav-link[href="#${id}"]`);
+            
             if (entry.isIntersecting) {
-                entry.target.classList.add('active');
+                navLink.classList.add('active');
+            } else {
+                navLink?.classList.remove('active');
             }
         });
-    }, { threshold: 0.25 });
+    }, {
+        rootMargin: `-${navbarHeight}px 0px 0px 0px`, 
+        threshold: 0.25
+    });
 
-    document.querySelectorAll('.phone-frame').forEach((el) => observer.observe(el));
+    document.querySelectorAll('section').forEach(section => {
+        sectionObserver.observe(section);
+    });
+
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                window.scrollTo({
+                    top: target.offsetTop - navbarHeight,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
 
     document.fonts.ready.then(() => {
         document.body.style.opacity = 1;
-    });
-
-    window.addEventListener('scroll', () => {
-        document.querySelectorAll('.phone-frame').forEach(frame => {
-            const speed = -0.5;
-            const y = window.pageYOffset * speed;
-            frame.style.transform = `translateY(${y}px)`;
-        });
     });
 </script>
 <script>
@@ -513,5 +543,45 @@
     
     createGame();
     </script>
+<script>
+    function checkMatch(cardA, cardB) {
+        const match = cardA.dataset.image === cardB.dataset.image;
+        
+        if (!match) {
+            setTimeout(() => {
+                cardA.classList.remove('flipped');
+                cardB.classList.remove('flipped');
+            }, 1000);
+        } else {
+            setTimeout(() => {
+                if (document.querySelectorAll('.memory-card:not(.flipped)').length === 0) {
+                    clearInterval(timer);
+                    timer = null;
+                    showGameResult();
+                }
+            }, 500);
+        }
+    }
+
+    function showGameResult() {
+        document.getElementById('final-time').textContent = seconds;
+        document.getElementById('final-moves').textContent = moves;
+        document.getElementById('memory-result').style.display = 'block';
+    }
+
+    function resetGame() {
+        document.getElementById('memory-result').style.display = 'none';
+        clearInterval(timer);
+        timer = null;
+        seconds = 0;
+        moves = 0;
+        firstCard = null;
+        document.getElementById('time').textContent = '0';
+        document.getElementById('moves').textContent = '0';
+        createGame();
+    }
+
+    document.getElementById('restart').addEventListener('click', resetGame);
+</script>
 </body>
 </html>
