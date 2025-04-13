@@ -256,6 +256,104 @@
     </div>
 </section>
 
+<section id="cat-storybook" class="py-5">
+    <div class="container">
+        <div class="storybook">
+            <div class="book-page cover">
+                <h1>Milo & Nala<br>Une Histoire de Pattes</h1>
+                <img src="cover-image.png" alt="Two cats cuddling" class="img-fluid">
+                <p class="author">Écrit par leur Humain Adoré</p>
+            </div>
+            <div class="book-page">
+                <div class="page-content">
+                    <img src="page1.png" alt="Kittens in shelter" class="page-image">
+                    <div class="story-text">
+                        <h2>Chapitre 1 : La Princesse du Refuge</h2>
+                        <p>Il était une fois une petite chatte tigrée nommée Nala. Abandonnée très jeune, elle vivait dans un refuge en attendant son royaume pour toujours. Un jour, un humain au grand cœur dit :</p>
+                        <p class="dialogue">"C'est toi que je veux adopter !"</p>
+                        <p>Nala ronronna doucement : <em>"Enfin une maison à conquérir !"</em> 🏰</p>
+                    </div>
+                </div>
+            </div>
+            <div class="book-page">
+                <div class="page-content">
+                    <img src="page2.png" alt="Cats going home" class="page-image">
+                    <div class="story-text">
+                        <h2>Chapitre 2 : Le Mystérieux Matou</h2>
+                        <p>Un an plus tard, lors d'une nuit d'orage, un petit miracle arriva. Un chaton sans queue, maigre et tremblant, fut découvert sous un buisson. L'humain de Nala soupira :</p>
+                        <p class="dialogue">"Bienvenue à la maison, petit Milo !"</p>
+                        <p>Nala observa l'intrus : <em>"Hum... On dirait une boule de poils mal léchée !"</em> 😾</p>
+                    </div>
+                </div>
+            </div>
+            <div class="book-page">
+                <div class="page-content">
+                    <img src="page3.png" alt="Milo with food bowl" class="page-image">
+                    <div class="story-text">
+                        <h2>Chapitre 3 : Les Ennuis de Ventre</h2>
+                        <p>Milo avait souvent mal au ventre. Le vétérinaire expliqua :</p>
+                        <p class="dialogue">"Un régime spécial et des médicaments, sinon..."</p>
+                        <p>Nala, qui feignait de dormir, entendit tout. Cette nuit-là, elle poussa doucement sa gamelle vers Milo : <em>"Prends ça, mais ne dis rien !"</em> 🥄</p>
+                    </div>
+                </div>
+            </div>
+            <div class="book-page">
+                <div class="page-content">
+                    <img src="page4.png" alt="Nala exploring" class="page-image">
+                    <div class="story-text">
+                        <h2>Chapitre 4 : La Grande Exploratrice</h2>
+                        <p>Équipée de son collier GPS, Nala partait chaque nuit en mission :</p>
+                        <ul class="aventures">
+                            <li>🌙 Cartographier 7 jardins</li>
+                            <li>🐾 Laisser des messages odorants</li>
+                            <li>😾 Griffer l'aspirateur méchant</li>
+                        </ul>
+                        <p>Mais elle revenait toujours avant le petit-déj !</p>
+                    </div>
+                </div>
+            </div>
+            <div class="book-page">
+                <div class="page-content">
+                    <img src="page5.png" alt="Cats at vet" class="page-image">
+                    <div class="story-text">
+                        <h2>Chapitre 5 : Le Secret des Ronrons</h2>
+                        <p>Un hiver glacial, Milo grelottait. Nala s'approcha à reculons :</p>
+                        <p class="dialogue">"Tu occupes trop de place... Mais reste là, ça passe."</p>
+                        <p>Depuis ce jour, ils dorment en boule, protégés contre :</p>
+                        <div class="ennemis">
+                            <span>🚫 Les croquettes light</span>
+                            <span>🚫 Les orages</span>
+                            <span>🚫 Les voyages en voiture</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="book-page last-page">
+                <div class="page-content"> 
+                    <img src="last-page.png" alt="Cats sleeping" class="page-image">
+                    <div class="story-text">
+                        <h2>Épilogue : Pour Toujours</h2>
+                        <p>Aujourd'hui :</p>
+                        <ul class="aventures">
+                            <li>😺 Nala surveille Milo comme une maman poule</li>
+                            <li>😻 Milo partage ses cachettes secrètes</li>
+                            <li>❤️ Leur humain les adore (et ils le savent !)</li>
+                        </ul>
+                        <p class="fin">Fin</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-controls">
+            <button id="prevPage" class="btn btn-book">← Précédent</button>
+            <span id="pageNumber">Page 1 sur 6</span>
+            <button id="nextPage" class="btn btn-book">Suivant →</button>
+        </div>
+    </div>
+</section>
+
+
+
     </main>
 
     <footer id="contact" class="bg-dark text-white py-4">
@@ -583,5 +681,28 @@
 
     document.getElementById('restart').addEventListener('click', resetGame);
 </script>
+<script>
+    let currentPage = 0;
+    const pages = document.querySelectorAll('.book-page');
+    
+    function showPage(pageIndex) {
+        pages.forEach(page => page.classList.remove('active'));
+        pages[pageIndex].classList.add('active');
+        document.getElementById('pageNumber').textContent = `Page ${pageIndex+1} sur ${pages.length}`;
+        
+        document.getElementById('prevPage').disabled = pageIndex === 0;
+        document.getElementById('nextPage').disabled = pageIndex === pages.length-1;
+    }
+    
+    document.getElementById('prevPage').addEventListener('click', () => {
+        if(currentPage > 0) showPage(--currentPage);
+    });
+    
+    document.getElementById('nextPage').addEventListener('click', () => {
+        if(currentPage < pages.length-1) showPage(++currentPage);
+    });
+    
+    showPage(0);
+    </script>
 </body>
 </html>
